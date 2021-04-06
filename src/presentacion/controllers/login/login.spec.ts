@@ -1,5 +1,5 @@
 import { LoginController } from './login'
-import { badRequest, serverError, unauthorized, ok } from '../../helpers/httpHelper'
+import { badRequest, serverError, unauthorized, ok } from '../../helpers/http/httpHelper'
 import { MissingParamError } from '../../errors/missing-param-error'
 import { HttpRequest, Authentication, Validation } from './login-protocols'
 
