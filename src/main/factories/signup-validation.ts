@@ -1,7 +1,7 @@
 import { ValidationComposite } from '../../presentacion/helpers/validators/validator-composite'
 import { RequiredFieldsValidation } from '../../presentacion/helpers/validators/required-fields-validation'
 import { Validation } from '../../presentacion/helpers/validators/validation'
-import { CompareFieldsValiation } from '../../presentacion/helpers/validators/compare-fields-validation'
+import { CompareFieldsValidation } from '../../presentacion/helpers/validators/compare-fields-validation'
 import { EmailValiDation } from '../../presentacion/helpers/validators/email-validation'
 import { EmailValidatorAdapter } from '../../utils/email-validator-adapter'
 
@@ -10,7 +10,7 @@ export const makeSignUpValidation = (): ValidationComposite => {
 
   for (const field of ['name', 'email', 'password', 'passwordConfirmation']) {
     validations.push(new RequiredFieldsValidation(field))
-    validations.push(new CompareFieldsValiation('password', 'passwordConfirmation'))
+    validations.push(new CompareFieldsValidation('password', 'passwordConfirmation'))
     validations.push(new EmailValiDation('email', new EmailValidatorAdapter()))
   }
 

@@ -2,7 +2,7 @@ import { RequiredFieldsValidation } from '../../presentacion/helpers/validators/
 import { ValidationComposite } from '../../presentacion/helpers/validators/validator-composite'
 import { makeSignUpValidation } from './signup-validation'
 import { Validation } from '../../presentacion/helpers/validators/validation'
-import { CompareFieldsValiation } from '../../presentacion/helpers/validators/compare-fields-validation'
+import { CompareFieldsValidation } from '../../presentacion/helpers/validators/compare-fields-validation'
 import { EmailValiDation } from '../../presentacion/helpers/validators/email-validation'
 import { EmailValidator } from '../../presentacion/protocols/emailValidator'
 
@@ -24,7 +24,7 @@ describe('SignUp Validation Factory', () => {
     const validations: Validation[] = []
     for (const field of ['name', 'email', 'password', 'passwordConfirmation']) {
       validations.push(new RequiredFieldsValidation(field))
-      validations.push(new CompareFieldsValiation('password', 'passwordConfirmation'))
+      validations.push(new CompareFieldsValidation('password', 'passwordConfirmation'))
       validations.push(new EmailValiDation('email', makeEmailValidator()))
     }
 
