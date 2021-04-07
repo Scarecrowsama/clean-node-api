@@ -6,7 +6,8 @@
     "esModuleInterop": true,
     "rootDirs": ["src"],
     "strictNullChecks": false,
-    "sourceMap": true
+    "sourceMap": true,
+    "rootDir": "src"
   },
   "include": [
     "src"
