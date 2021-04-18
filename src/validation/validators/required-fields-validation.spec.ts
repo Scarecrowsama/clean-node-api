@@ -1,5 +1,5 @@
 import { RequiredFieldsValidation } from './required-fields-validation'
-import { MissingParamError } from '../../presentacion/errors'
+import { MissingParamError } from '@/presentacion/errors'
 
 const makeSut = (): RequiredFieldsValidation => {
   return new RequiredFieldsValidation('field')
