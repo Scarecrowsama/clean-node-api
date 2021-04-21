@@ -1,5 +1,5 @@
 import { AccountMongoRepository } from '@/infrastructure/db/mongodb/account/acc-mongo-repositoryount'
-import { DbLoadAccountByToken } from '@/data/usecases/load-account-by-token/db-load-account-by-token'
+import { DbLoadAccountByToken } from '@/data/usecases/survey/load-account-by-token/db-load-account-by-token'
 import { JWTAdapter } from '@/infrastructure/cryptography/jwt-adapter/jwt-adapter'
 import env from '@/main/config/env'
 
