@@ -19,13 +19,13 @@ export const surveysPath = {
         }
       },
       403: {
-        $ref: '#components/forbidden'
+        $ref: '#/components/forbidden'
       },
       404: {
-        $ref: '#components/notFound'
+        $ref: '#/components/notFound'
       },
       500: {
-        $ref: '#components/serverError'
+        $ref: '#/components/serverError'
       }
     }
   },
@@ -52,13 +52,13 @@ export const surveysPath = {
         description: 'Success'
       },
       403: {
-        $ref: '#components/forbidden'
+        $ref: '#/components/forbidden'
       },
       404: {
-        $ref: '#components/notFound'
+        $ref: '#/components/notFound'
       },
       500: {
-        $ref: '#components/serverError'
+        $ref: '#/components/serverError'
       }
     }
   }

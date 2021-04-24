@@ -27,13 +27,13 @@ export const loginPath = {
         $ref: '#/components/badRequest'
       },
       401: {
-        $ref: '#components/unauthorized'
+        $ref: '#/components/unauthorized'
       },
       404: {
-        $ref: '#components/notFound'
+        $ref: '#/components/notFound'
       },
       500: {
-        $ref: '#components/serverError'
+        $ref: '#/components/serverError'
       }
     }
   }
