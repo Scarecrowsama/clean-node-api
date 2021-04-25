@@ -3,7 +3,7 @@ import MockDate from 'mockdate'
 import { DbLoadSurveyById } from './db-load-survey-by-id'
 import { throwError } from '@/domain/test'
 import { mockLoadSurveyByIdRepository } from '@/data/test'
-import { mockSurvey } from '@/domain/test/'
+import { mockSurveyModel } from '@/domain/test/'
 
 type SutTypes = {
   sut: DbLoadSurveyById
@@ -38,7 +38,7 @@ describe('DbLoadSurveyById', () => {
   test('Should return a Survey on success', async () => {
     const { sut } = makeSut()
     const surveys = await sut.loadById('any_id')
-    expect(surveys).toEqual(mockSurvey())
+    expect(surveys).toEqual(mockSurveyModel())
   })
 
   test('Should throw if LoadSurveyByIdRepository throws', async () => {
