@@ -1,6 +1,7 @@
 import {
   Authentication,
   AuthenticationParams,
+  AuthenticationModel,
   LoadAccountByEmailRepository,
   UpdateAccessTokenRepository,
   HashComparer,
@@ -14,7 +15,7 @@ export class DbAuthentication implements Authentication {
     private readonly tokenGenerator: Encrypter,
     private readonly updateAccessTokenRepository: UpdateAccessTokenRepository) {}
 
-  async auth (authentication: AuthenticationParams): Promise<string> {
+  async auth (authentication: AuthenticationParams): Promise<AuthenticationModel> {
     const account = await this.loadAccountByEmailRepository.loadByEmail(authentication.email)
 
     if (account) {
@@ -23,7 +24,10 @@ export class DbAuthentication implements Authentication {
       if (isValid) {
         const accessToken = await this.tokenGenerator.encrypt(account.id)
         await this.updateAccessTokenRepository.updateAccessToken(account.id, accessToken)
-        return accessToken
+        return {
+          accessToken,
+          name: account.name
+        }
       }
     }
 
