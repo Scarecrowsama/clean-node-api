@@ -105,6 +105,13 @@ describe('Survey Mongo Repository', () => {
   })
 
   describe('loadBySurveyId()', () => {
+    test('Should reurn null if there is no survey result', async () => {
+      const survey = await makeSurvey()
+      const sut = makeSut()
+      const surveyResult = await sut.loadBySurveyId(survey.id)
+      expect(surveyResult).toBeNull()
+    })
+
     test('Should load survey result', async () => {
       const survey = await makeSurvey()
       const account = await makeAccount()
