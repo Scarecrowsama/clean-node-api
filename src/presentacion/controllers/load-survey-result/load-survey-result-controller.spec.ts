@@ -1,6 +1,5 @@
-import { HttpRequest } from './load-survey-result-controller-protocols'
+import { HttpRequest, LoadSurveyById } from './load-survey-result-controller-protocols'
 import { LoadSurveyResultController } from './load-survey-result-controller'
-import { LoadSurveyById } from '@/domain/usecases/survey/load-survey-by-id'
 import { mockLoadSurveyById } from '@/data/test'
 
 const makeFakeRequest = (): HttpRequest => ({
