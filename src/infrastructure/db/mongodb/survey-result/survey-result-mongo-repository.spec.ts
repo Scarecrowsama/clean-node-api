@@ -107,8 +107,9 @@ describe('Survey Mongo Repository', () => {
   describe('loadBySurveyId()', () => {
     test('Should reurn null if there is no survey result', async () => {
       const survey = await makeSurvey()
+      const account = await makeAccount()
       const sut = makeSut()
-      const surveyResult = await sut.loadBySurveyId(survey.id)
+      const surveyResult = await sut.loadBySurveyId(survey.id, account.id)
       expect(surveyResult).toBeNull()
     })
 
@@ -142,11 +143,12 @@ describe('Survey Mongo Repository', () => {
         }
       ])
       const sut = makeSut()
-      const surveyResult = await sut.loadBySurveyId(survey.id)
+      const surveyResult = await sut.loadBySurveyId(survey.id, account.id)
       expect(surveyResult).toBeTruthy()
       expect(surveyResult.surveyId).toEqual(survey.id)
       expect(surveyResult.answers[0].count).toBe(2)
       expect(surveyResult.answers[0].percent).toBe(50)
+      expect(surveyResult.answers[0].isCurrentAccountAnswer).toBe(true)
       expect(surveyResult.answers[1].count).toBe(2)
       expect(surveyResult.answers[1].percent).toBe(50)
       expect(surveyResult.answers[2].count).toBe(0)
