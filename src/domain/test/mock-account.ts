@@ -1,4 +1,4 @@
-import { AddAccount, AuthenticationParams } from '@/presentacion/controllers/authentication/signup/signup-controller-protocols'
+import { AddAccount, Authentication } from '@/presentacion/controllers/authentication/signup/signup-controller-protocols'
 import { AccountModel } from '@/presentacion/middlewares/auth-middleware-protocols'
 
 export const mockAddAccountParams = (): AddAccount.Params => ({
@@ -11,7 +11,7 @@ export const mockAccountModel = (): AccountModel => Object.assign({}, mockAddAcc
   id: 'any_id'
 })
 
-export const mockAuthentication = (): AuthenticationParams => ({
+export const mockAuthentication = (): Authentication.Params => ({
   email: 'any_email@email.com',
   password: 'any_password'
 })

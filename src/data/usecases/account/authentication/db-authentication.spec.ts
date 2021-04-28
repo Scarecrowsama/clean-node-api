@@ -88,7 +88,7 @@ describe('DB Authentication Usecase', () => {
     await expect(promise).rejects.toThrow()
   })
 
-  test('Should return an AuthenticationModel on success', async () => {
+  test('Should return data on success', async () => {
     const { sut, loadAccountByEmailRepositoryStub } = makeSut()
     jest.spyOn(loadAccountByEmailRepositoryStub, 'loadByEmail').mockReturnValueOnce(Promise.resolve(mockAccountModel()))
     const { accessToken, name } = await sut.auth(mockAuthentication())
