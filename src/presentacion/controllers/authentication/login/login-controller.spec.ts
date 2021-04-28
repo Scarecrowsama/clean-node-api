@@ -1,16 +1,14 @@
 import { LoginController } from './login-controller'
 import { badRequest, serverError, unauthorized, ok } from '@/presentacion/helpers/http/httpHelper'
 import { MissingParamError } from '@/presentacion/errors/missing-param-error'
-import { HttpRequest, Authentication, Validation } from './login-controller-protocols'
+import { Authentication, Validation } from './login-controller-protocols'
 import { mockAuthentication } from '@/presentacion/test'
 import { throwError } from '@/domain/test'
 import { mockValidation } from '@/validation/test'
 
-const mockRequest = (): HttpRequest => ({
-  body: {
-    email: 'any_email@email.com',
-    password: 'any_password'
-  }
+const mockRequest = (): LoginController.Request => ({
+  email: 'any_email@email.com',
+  password: 'any_password'
 })
 
 type SutTypes = {
@@ -64,9 +62,9 @@ describe('Login Controller', () => {
   test('Should call Validation with correct value', async () => {
     const { sut, validationStub } = makeSut()
     const validateSpy = jest.spyOn(validationStub, 'validate')
-    const httpRequest = mockRequest()
-    await sut.handle(httpRequest)
-    expect(validateSpy).toHaveBeenCalledWith(httpRequest.body)
+    const request = mockRequest()
+    await sut.handle(request)
+    expect(validateSpy).toHaveBeenCalledWith(request)
   })
 
   test('Should return 400 if Validation returns an error', async () => {

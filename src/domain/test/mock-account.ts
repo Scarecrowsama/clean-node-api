@@ -1,7 +1,7 @@
-import { AddAccountParams, AuthenticationParams } from '@/presentacion/controllers/authentication/signup/signup-controller-protocols'
+import { AddAccount, AuthenticationParams } from '@/presentacion/controllers/authentication/signup/signup-controller-protocols'
 import { AccountModel } from '@/presentacion/middlewares/auth-middleware-protocols'
 
-export const mockAddAccountParams = (): AddAccountParams => ({
+export const mockAddAccountParams = (): AddAccount.Params => ({
   name: 'any_name',
   email: 'any_email@mail.com',
   password: 'any_password'

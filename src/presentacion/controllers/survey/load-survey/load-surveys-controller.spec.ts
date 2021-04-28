@@ -1,11 +1,11 @@
 import MockDate from 'mockdate'
 import { LoadSurveysController } from './load-surveys-controller'
-import { LoadSurveys, HttpRequest } from './load-survey-controller-protocols'
+import { LoadSurveys } from './load-survey-controller-protocols'
 import { noContent, ok, serverError } from '@/presentacion/helpers/http/httpHelper'
 import { mockLoadSurveys } from '@/presentacion/test'
 import { mockSurveyModels, throwError } from '@/domain/test'
 
-const mockRequest = (): HttpRequest => ({
+const mockRequest = (): LoadSurveysController.Request => ({
   accountId: 'any_account_id'
 })
 
@@ -48,7 +48,7 @@ describe('LoadSurveys Controller', () => {
   test('Should return 204 if LoadSurveys returns nothing', async () => {
     const { sut, loadSurveysStub } = makeSut()
     jest.spyOn(loadSurveysStub, 'load').mockReturnValueOnce(Promise.resolve([]))
-    const httpReponse = await sut.handle({})
+    const httpReponse = await sut.handle({ accountId: null })
     expect(httpReponse).toEqual(noContent())
   })
 
