@@ -1,5 +1,5 @@
 import { SurveyModel } from '@/data/usecases/survey/load-survey-by-id/db-load-survey-by-id-protocols'
-import { AddSurveyParams } from '@/presentacion/controllers/survey/add-survey/add-survey-controller-protocols'
+import { AddSurvey } from '@/presentacion/controllers/survey/add-survey/add-survey-controller-protocols'
 
 export const mockSurveyModel = (): SurveyModel => ({
   id: 'any_id',
@@ -43,7 +43,7 @@ export const mockSurveyModels = (): SurveyModel[] => {
   ]
 }
 
-export const maockAddSurveyParams = (): AddSurveyParams => ({
+export const maockAddSurveyParams = (): AddSurvey.Params => ({
   question: 'any_question',
   answers: [
     {
