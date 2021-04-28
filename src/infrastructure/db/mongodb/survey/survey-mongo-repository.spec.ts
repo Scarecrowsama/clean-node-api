@@ -1,5 +1,4 @@
 import { Collection } from 'mongodb'
-import { AccountModel } from '@/domain/models/account'
 import { mockAddAccountParams } from '@/domain/test'
 import { MongoHelper } from '../helpers/mongo-helper'
 import { SurveyMongoRepository } from './survey-mongo-repository'
@@ -8,9 +7,9 @@ let surveyCollection: Collection
 let surveyResultCollection: Collection
 let accountCollection: Collection
 
-const makeAccount = async (): Promise<AccountModel> => {
+const mockAccountId = async (): Promise<string> => {
   const res = await accountCollection.insertOne(mockAddAccountParams())
-  return MongoHelper.map(res.ops[0])
+  return res.ops[0]._id
 }
 
 const makeSut = (): SurveyMongoRepository => {
@@ -81,15 +80,15 @@ describe('Survey Mongo Repository', () => {
         }
       ])
       const survey = result.ops[0]
-      const account = await makeAccount()
+      const accountId = await mockAccountId()
       await surveyResultCollection.insertOne({
         surveyId: survey._id,
-        accountId: (await account).id,
+        accountId,
         answer: survey.answers[0].answer,
         date: new Date()
       })
       const sut = makeSut()
-      const surveys = await sut.loadAll(account.id)
+      const surveys = await sut.loadAll(accountId)
       expect(surveys.length).toBe(2)
       expect(surveys[0].id).toBeTruthy()
       expect(surveys[0].question).toBe('any_question')
@@ -99,9 +98,9 @@ describe('Survey Mongo Repository', () => {
     })
 
     test('Should load empty list', async () => {
-      const account = await makeAccount()
+      const accountId = await mockAccountId()
       const sut = makeSut()
-      const surveys = await sut.loadAll(account.id)
+      const surveys = await sut.loadAll(accountId)
       expect(surveys.length).toBe(0)
     })
   })

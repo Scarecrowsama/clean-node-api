@@ -1,4 +1,3 @@
-import { AccountModel } from '@/domain/models/account'
 import { mockAccountModel } from '@/domain/test'
 import { AddAccountRepository } from '../protocols/db/account/add-account-repository'
 import { LoadAccountByEmailRepository } from '../protocols/db/account/load-account-by-email-repository'
@@ -8,7 +7,7 @@ import { UpdateAccessTokenRepository } from '../protocols/db/account/update-acce
 export const mockAddAccountRepository = (): AddAccountRepository => {
   class AddAccountRepositoryStub implements AddAccountRepository {
     async add (accountData: AddAccountRepository.Params): Promise<AddAccountRepository.Result> {
-      return Promise.resolve(mockAccountModel())
+      return Promise.resolve(true)
     }
   }
 
@@ -17,7 +16,7 @@ export const mockAddAccountRepository = (): AddAccountRepository => {
 
 export const mockLoadAccountByEmailRepository = (): LoadAccountByEmailRepository => {
   class LoadAccountByEmailRepositoryStub implements LoadAccountByEmailRepository {
-    async loadByEmail (email: string): Promise<AccountModel> {
+    async loadByEmail (email: string): Promise<LoadAccountByEmailRepository.Result> {
       return Promise.resolve(mockAccountModel())
     }
   }
