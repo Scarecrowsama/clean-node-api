@@ -1,9 +1,9 @@
 import { SurveyModel } from '@/domain/models/survey'
 import { mockSurveyModel, mockSurveyModels } from '@/domain/test/'
 import { CheckSurveyById } from '@/domain/usecases/survey/check-survey-by-id'
-import { LoadAnswersBySurvey } from '@/domain/usecases/survey/load-answers-by-survey'
 import { AddSurveyRepository } from '../protocols/db/survey/add-survey-repository'
 import { CheckSurveyByIdRepository } from '../protocols/db/survey/check-survey-by-id-repository'
+import { LoadAnswersBySurveyRepository } from '../protocols/db/survey/load-answers-by-survey-repository'
 import { LoadSurveyByIdRepository } from '../protocols/db/survey/load-survey-by-id-repository'
 import { LoadSurveysRepository } from '../protocols/db/survey/load-surveys-repository'
 
@@ -37,10 +37,10 @@ export const mockCheckSurveyByIdRepository = (): CheckSurveyByIdRepository => {
   return new CheckSurveyByIdRepositoryStub()
 }
 
-export const mockLoadAnswersBySurvey = (): LoadAnswersBySurvey => {
-  class LoadAnswersBySurveyStub implements LoadAnswersBySurvey {
-    async loadAnswers (id: string): Promise<string[]> {
-      return Promise.resolve(mockSurveyModel().answers.map(a => a.answer))
+export const mockLoadAnswersBySurvey = (): LoadAnswersBySurveyRepository => {
+  class LoadAnswersBySurveyStub implements LoadAnswersBySurveyRepository {
+    async loadAnswers (id: string): Promise<LoadAnswersBySurveyRepository.Result> {
+      return mockSurveyModel().answers.map(a => a.answer)
     }
   }
 
