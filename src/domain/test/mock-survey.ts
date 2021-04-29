@@ -1,4 +1,4 @@
-import { SurveyModel } from '@/data/usecases/survey/load-survey-by-id/db-load-survey-by-id-protocols'
+import { SurveyModel } from '@/data/usecases/survey/load-survey-by-id/db-load-answers-by-survey-protocols'
 import { AddSurvey } from '@/presentacion/controllers/survey/add-survey/add-survey-controller-protocols'
 
 export const mockSurveyModel = (): SurveyModel => ({

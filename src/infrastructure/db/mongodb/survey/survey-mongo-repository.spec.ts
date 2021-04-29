@@ -1,3 +1,4 @@
+import ObjectID from 'bson-objectid'
 import { Collection } from 'mongodb'
 import { mockAddAccountParams } from '@/domain/test'
 import { MongoHelper } from '../helpers/mongo-helper'
@@ -121,6 +122,30 @@ describe('Survey Mongo Repository', () => {
       const survey = await sut.loadById(res.ops[0]._id)
       expect(survey).toBeTruthy()
       expect(survey.id).toBeTruthy()
+    })
+  })
+
+  describe('checkById()', () => {
+    test('Should return true if survey exists', async () => {
+      const res = await surveyCollection.insertOne({
+        question: 'any_question',
+        answers: [
+          {
+            image: 'any_image',
+            answer: 'any_answer'
+          }
+        ],
+        date: new Date()
+      })
+      const sut = makeSut()
+      const exists = await sut.checkById(res.ops[0]._id)
+      expect(exists).toBe(true)
+    })
+
+    test('Should return false if survey does not exist', async () => {
+      const sut = makeSut()
+      const exists = await sut.checkById(ObjectID.generate())
+      expect(exists).toBe(false)
     })
   })
 })

@@ -1,7 +1,9 @@
 import { SurveyModel } from '@/domain/models/survey'
 import { mockSurveyModel, mockSurveyModels } from '@/domain/test/'
-import { LoadSurveyById } from '@/domain/usecases/survey/load-survey-by-id'
+import { CheckSurveyById } from '@/domain/usecases/survey/check-survey-by-id'
+import { LoadAnswersBySurvey } from '@/domain/usecases/survey/load-answers-by-survey'
 import { AddSurveyRepository } from '../protocols/db/survey/add-survey-repository'
+import { CheckSurveyByIdRepository } from '../protocols/db/survey/check-survey-by-id-repository'
 import { LoadSurveyByIdRepository } from '../protocols/db/survey/load-survey-by-id-repository'
 import { LoadSurveysRepository } from '../protocols/db/survey/load-surveys-repository'
 
@@ -17,7 +19,7 @@ export const mockAddSurveyRepository = (): AddSurveyRepository => {
 
 export const mockLoadSurveyByIdRepository = (): LoadSurveyByIdRepository => {
   class LoadSurveyByIdRepositoryStub implements LoadSurveyByIdRepository {
-    async loadById (id: string): Promise<SurveyModel> {
+    async loadById (id: string): Promise<LoadSurveyByIdRepository.Result> {
       return Promise.resolve(mockSurveyModel())
     }
   }
@@ -25,14 +27,34 @@ export const mockLoadSurveyByIdRepository = (): LoadSurveyByIdRepository => {
   return new LoadSurveyByIdRepositoryStub()
 }
 
-export const mockLoadSurveyById = (): LoadSurveyById => {
-  class LoadSurveyByIdStub implements LoadSurveyById {
-    async loadById (id: string): Promise<SurveyModel> {
-      return Promise.resolve(mockSurveyModel())
+export const mockCheckSurveyByIdRepository = (): CheckSurveyByIdRepository => {
+  class CheckSurveyByIdRepositoryStub implements CheckSurveyByIdRepository {
+    async checkById (id: string): Promise<CheckSurveyByIdRepository.Result> {
+      return Promise.resolve(true)
     }
   }
 
-  return new LoadSurveyByIdStub()
+  return new CheckSurveyByIdRepositoryStub()
+}
+
+export const mockLoadAnswersBySurvey = (): LoadAnswersBySurvey => {
+  class LoadAnswersBySurveyStub implements LoadAnswersBySurvey {
+    async loadAnswers (id: string): Promise<string[]> {
+      return Promise.resolve(mockSurveyModel().answers.map(a => a.answer))
+    }
+  }
+
+  return new LoadAnswersBySurveyStub()
+}
+
+export const mockCheckSurveyById = (): CheckSurveyById => {
+  class CheckSurveyByIdStub implements CheckSurveyById {
+    async checkById (id: string): Promise<boolean> {
+      return Promise.resolve(true)
+    }
+  }
+
+  return new CheckSurveyByIdStub()
 }
 
 export const mockLoadSurveysRepository = (): LoadSurveysRepository => {
