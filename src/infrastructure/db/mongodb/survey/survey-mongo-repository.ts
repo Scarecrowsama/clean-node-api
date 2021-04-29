@@ -5,7 +5,6 @@ import { LoadSurveyByIdRepository } from '@/data/usecases/survey/load-answers-by
 import { MongoHelper, QueryBuilder } from '../helpers/'
 import { CheckSurveyByIdRepository } from '@/data/protocols/db/survey/check-survey-by-id-repository'
 import { LoadAnswersBySurveyRepository } from '@/data/protocols/db/survey/load-answers-by-survey-repository'
-
 export class SurveyMongoRepository implements AddSurveyRepository, LoadSurveysRepository, LoadSurveyByIdRepository, LoadAnswersBySurveyRepository, CheckSurveyByIdRepository {
   async add (surveyData: AddSurveyRepository.Params): Promise<void> {
     const accountCollection = await MongoHelper.getCollection('surveys')
